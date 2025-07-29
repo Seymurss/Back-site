@@ -15,3 +15,4 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/projects/{id}', [ProjectController::class, 'update']);
     Route::delete('/projects/{id}', [ProjectController::class, 'destroy']);
 }); 
+
