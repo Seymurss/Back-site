@@ -28,3 +28,6 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 
 EXPOSE 80
 
+
+RUN docker-php-ext-install pdo_pgsql
+
