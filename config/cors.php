@@ -15,11 +15,17 @@ return [
     |
     */
 
+    
+
     'paths' => ['api/*', 'admin/*'], // API ve admin login route'ları dahil
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => [
+    'https://my-site-front.netlify.app',
+    'https://6889310488d22a00088e54fa--my-site-front.netlify.app',
+],
+
 
     'allowed_origins_patterns' => [],
 
