@@ -17,7 +17,7 @@ return [
 
     
 
-    'paths' => ['api/*', 'admin/*'], // API ve admin login route'ları dahil
+    'paths' => ['api/*', 'admin/*','projects'], // API ve admin login route'ları dahil
 
     'allowed_methods' => ['*'],
 
