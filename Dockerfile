@@ -28,6 +28,8 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 
 EXPOSE 80
 
+RUN apt-get update && apt-get install -y libpq-dev
+
 
 RUN docker-php-ext-install pdo_pgsql
 
