@@ -24,7 +24,7 @@ RUN sed -ri -e 's!/var/www/!/var/www/html/public!g' /etc/apache2/apache2.conf /e
 RUN a2enmod rewrite
 
 # Laravel permission (opsional)
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
 
 EXPOSE 80
 
