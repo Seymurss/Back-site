@@ -1,9 +1,9 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -13,16 +13,19 @@ class ProjectController extends Controller
     }
 
     public function store(Request $request)
-    { 
+    {
         $data = $request->validate([
             'title' => 'required|string|max:255',
             'technologies' => 'nullable|string|max:255',
             'project_url' => 'nullable|string|max:255',
-            'image' => 'nullable|image|max:2048', // max 2MB
+            'image' => 'nullable|image|max:2048',
         ]);
 
         if ($request->hasFile('image')) {
-            $data['image_path'] = $request->file('image')->store('projects', 'public');
+            $image = $request->file('image');
+            $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('projects'), $imageName); // public/projects folderinə atılır
+            $data['image_path'] = 'projects/' . $imageName; // sadəcə yol (URL üçün)
         }
 
         $project = Project::create($data);
@@ -47,10 +50,15 @@ class ProjectController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            if ($project->image_path) {
-                Storage::disk('public')->delete($project->image_path);
+            // Köhnə şəkli sil (əgər varsa)
+            if ($project->image_path && file_exists(public_path($project->image_path))) {
+                unlink(public_path($project->image_path));
             }
-            $data['image_path'] = $request->file('image')->store('projects', 'public');
+
+            $image = $request->file('image');
+            $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('projects'), $imageName);
+            $data['image_path'] = 'projects/' . $imageName;
         }
 
         $project->update($data);
@@ -62,8 +70,9 @@ class ProjectController extends Controller
     {
         $project = Project::findOrFail($id);
 
-        if ($project->image_path) {
-            Storage::disk('public')->delete($project->image_path);
+        // Şəkli sil
+        if ($project->image_path && file_exists(public_path($project->image_path))) {
+            unlink(public_path($project->image_path));
         }
 
         $project->delete();
