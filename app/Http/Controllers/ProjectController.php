@@ -13,7 +13,7 @@ class ProjectController extends Controller
     }
 
     public function store(Request $request)
-    {
+    { 
         $data = $request->validate([
             'title' => 'required|string|max:255',
             'technologies' => 'nullable|string|max:255',
