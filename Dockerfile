@@ -25,6 +25,10 @@ RUN a2enmod rewrite
 
 # Laravel permission (opsional)
 
+RUN mkdir -p storage/framework/sessions storage/framework/cache storage/framework/views storage/logs && \
+    chown -R www-data:www-data storage bootstrap/cache && \
+    chmod -R 775 storage bootstrap/cache
+
 
 EXPOSE 80
 
