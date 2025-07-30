@@ -21,10 +21,11 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => [],
+    'allowed_origins' => ['*'],
 
     'allowed_origins_patterns' => [
         '^https:\/\/.*--my-site-front\.netlify\.app$',
+        '^https:\/\/my-site-front\.netlify\.app$'
     ],
 
 
