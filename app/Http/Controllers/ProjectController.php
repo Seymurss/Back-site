@@ -28,7 +28,7 @@ class ProjectController extends Controller
             $data['image_path'] = 'projects/' . $imageName; // sadəcə yol (URL üçün)
         }
 
-        $project = Project::create($data);
+        $project = Project::create($data); 
 
         return response()->json($project, 201);
     }
